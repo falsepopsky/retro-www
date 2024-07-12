@@ -2,13 +2,10 @@ name: Node.js CI
 on:  
   pull_request:
     branches: main
-     
+
 jobs:
   lint:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4.1.7
@@ -21,6 +18,7 @@ jobs:
         with:
           node-version-file: "./frontend/.nvmrc"
           cache: pnpm
+          cache-dependency-path: "./frontend/pnpm-lock.yaml"
       - name: Install dependencies
         run: pnpm install
       - name: Run lint
@@ -40,6 +38,7 @@ jobs:
         with:
           node-version-file: "./frontend/.nvmrc"
           cache: pnpm
+          cache-dependency-path: "./frontend/pnpm-lock.yaml"
       - name: Install dependencies
         run: pnpm install
       - name: Run build

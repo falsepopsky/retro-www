@@ -8,11 +8,12 @@ jobs:
   lint:
     if: contains(github.event.pull_request.labels.*.name, 'frontend')
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4.1.7
-      - name: Navigate to frontend directory
-        run: cd frontend
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
       - name: Setup Node
@@ -31,8 +32,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4.1.7
-      - name: Navigate to frontend directory
-        run: cd frontend
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
       - name: Setup Node
